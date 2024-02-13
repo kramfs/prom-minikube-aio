@@ -95,11 +95,11 @@ Convention: Any text formatted as `like this` is a command that will need to be 
 * Check metrics using PromQL: `task prom-query`
 
 * The resource average dashboard is accessible via
-  - https://grafana.dev.internal/d/resource-avg/resource-average
+  - http://grafana.dev.internal/d/resource-avg/resource-average
   - Grafana login uses the default helm operator value: `admin/prom-operator`
 
-* To manually check the ingress: 
-  - `/foo` : http://echo.dev.internal/foo 
+* To manually check the ingress:
+  - `/foo` : http://echo.dev.internal/foo
   - `/bar` : http://echo.dev.internal/bar
 
 * To tear down the whole setup and clean up the state files: `task cleanup`
