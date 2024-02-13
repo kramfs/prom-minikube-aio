@@ -1,0 +1,110 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task --list-all
+
+  init:
+    internal: true
+    cmds:
+      - terraform init $PARAMETER
+    env:
+      PARAMETER: -upgrade
+
+  plan:
+    internal: true
+    cmds:
+      - terraform plan $PARAMETER
+
+  apply:
+    internal: true
+    cmds:
+      - terraform apply $PARAMETER
+    env:
+      PARAMETER: --auto-approve
+
+  create_cluster:
+    internal: true
+    cmds:
+      - task: init
+      - task: apply
+
+  destroy:
+    internal: true
+    cmds:
+      - terraform destroy $PARAMETER
+    env:
+      #PARAMETER: --auto-approve
+
+  cleanup:
+    cmds:
+      - task: destroy
+      #- rm -Rvf .terraform terraform.* .terraform.lock.hcl
+      - find . -name '*terraform*' -print | xargs rm -Rf
+
+  backend_service:
+    internal: true
+    preconditions:
+      # Fail when the k8s cluster is not running
+      - kubectl get all
+    env:
+      APPLY: kubectl apply
+    dir: ./deployments
+    cmds:
+      - $APPLY --recursive=true -f foo
+      - $APPLY --recursive=true -f bar
+
+  setup-dashboard:
+    internal: true
+    preconditions:
+      # Fail when prometheus service is not up yet
+      - sh: 'curl --connect-timeout 2 http://grafana.dev.internal/'
+        msg: "Make sure that the deployment manifests is deployed and the host entry '192.168.49.50   grafana.dev.internal' is set "
+    dir: ./dashboards
+    cmds:
+      - terraform init --upgrade
+      - terraform apply --auto-approve
+
+  ## Bring up the Cluster and setup the required resources
+  up:
+    env:
+      INGRESS_CONTROLLER: kubectl get svc ingress-nginx-controller -n ingress-nginx
+      INGRESS: kubectl get ingress -A
+    cmds:
+      - task: create_cluster
+      - task: backend_service
+      - task: setup-dashboard
+      - $INGRESS_CONTROLLER
+      - $INGRESS
+
+  loadtest:
+    preconditions:
+      # Fail when backend service is not up yet
+      - sh: 'curl --connect-timeout 2 http://echo.dev.internal/'
+        msg: "Make sure that the deployment manifests is deployed and the host entry '192.168.49.50   echo.dev.internal' is set "
+    dir: ./loadtest
+    cmds:
+      - pkgx k6 run stress.js
+
+  ingress-check:
+    preconditions:
+       # Fail when backend service is not up yet
+      - sh: 'curl --connect-timeout 2 http://echo.dev.internal/'
+        msg: "Make sure that the deployment manifests is deployed and the host entry '192.168.49.50   echo.dev.internal' is set "
+    cmds:
+      - curl -i http://echo.dev.internal/foo
+      - curl -i http://echo.dev.internal/bar
+
+  prom-query:
+    env:
+      QUERY: curl -s http://prometheus.dev.internal/api/v1/query --data-urlencode
+    preconditions:
+      # Fail when prometheus service is not up yet
+      - sh: 'curl --connect-timeout 2 http://prometheus.dev.internal/api/v1/query'
+        msg: "Make sure that the Prometheus service is running and the host entry '192.168.49.50   prometheus.dev.internal' is set "
+    cmds:
+      - $QUERY 'query=avg(rate(container_cpu_usage_seconds_total[5m])) by (namespace)' | jq
+      - $QUERY 'query=round(avg(container_memory_usage_bytes) by (namespace), 0.1)' | jq
+      - $QUERY 'query=round(avg(irate(prometheus_http_requests_total[1m])) by (pod), 0.001)' | jq
+      - $QUERY 'query=avg(irate(nginx_ingress_controller_requests[10m:10s])) by (ingress)' | jq

@@ -1,0 +1,45 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: foo-deployment-hpa
+  namespace: foo-deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: foo-deployment
+  minReplicas: 1
+  maxReplicas: 4
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 100
+
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 30
+      ## Either a single scaling behavior policy or more than one can be attached to an HPA,
+      ## and the policy that results in the highest amount of change for a given instance is automatically selected.
+      policies:
+      #- type: Pods              # The autoscaler will remove 2 pods at a time in a period of 60 seconds.
+      #  value: 2
+      #  periodSeconds: 15
+      - type: Percent           # The autoscaler will remove 10% of the current replica number in 60 seconds.
+        value: 100
+        periodSeconds: 15
+  #  scaleUp:
+  #    stabilizationWindowSeconds: 60
+  #    policies:
+  #    - type: Percent
+  #      value: 100
+  #      periodSeconds: 15
+  #    - type: Pods
+  #      value: 2
+  #      periodSeconds: 15

@@ -1,0 +1,19 @@
+---
+## --- SERVICE MONITOR ---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: bar-servicemonitor
+  namespace: bar-deployment
+  labels:
+    app.kubernetes.io/name: bar-deployment
+spec:
+  selector:
+    matchLabels:
+      #app: bar-deployment
+      app.kubernetes.io/name: bar-deployment
+  endpoints:
+    #- port: metrics
+    #- port: http-service
+    #  path: /metrics
+    - interval: 5s

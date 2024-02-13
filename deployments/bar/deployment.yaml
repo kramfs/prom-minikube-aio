@@ -1,0 +1,77 @@
+## NAMESPACE
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bar-deployment
+  labels:
+    app: bar-deployment
+    app.kubernetes.io/name: bar-deployment
+---
+## DEPLOYMENT
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bar-deployment
+    app.kubernetes.io/name: bar-deployment
+  name: bar-deployment
+  namespace: bar-deployment
+  annotations:
+    #prometheus.io/port: "prometheus"
+    prometheus.io/scrape: 'true'
+spec:
+  selector:
+    matchLabels:
+      app: bar-deployment
+  template:
+    metadata:
+      labels:
+        app: bar-deployment
+      annotations:
+        #prometheus.io/port: "prometheus"
+        prometheus.io/scrape: 'true'
+    spec:
+      containers:
+      - name: bar-deployment
+        args:
+          - -text=bar
+        image: hashicorp/http-echo:1.0
+        imagePullPolicy: IfNotPresent     # Available values: Always,IfNotPresent,Never
+        ports:
+          - containerPort: 5678
+            name: http-pod
+            protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 50Mi
+          requests:
+            cpu: 50m
+            memory: 20Mi
+        startupProbe:
+          httpGet:
+            path: /
+            port: http-pod                # See value in ports.containerPort
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http-pod                # See value in ports.containerPort
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http-pod                # See value in ports.containerPort
+          periodSeconds: 10
+          failureThreshold: 1
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 20000
+          runAsGroup: 20000
+          capabilities:
+            drop: ["ALL"]

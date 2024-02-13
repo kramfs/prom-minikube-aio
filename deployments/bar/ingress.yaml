@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bar-ingress
+  namespace: bar-deployment
+  labels:
+    app.kubernetes.io/name: bar-deployment
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: echo.dev.internal     # We need this so we have per ingress metrics, see https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/#wildcard-ingresses
+    http:
+      paths:
+      - path: /bar
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: bar-service
+            port:
+              number: 80

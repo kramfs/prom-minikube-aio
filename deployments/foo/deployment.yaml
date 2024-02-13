@@ -1,0 +1,75 @@
+## NAMESPACE
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: foo-deployment
+  labels:
+    app.kubernetes.io/name: foo-deployment
+---
+## DEPLOYMENT
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: foo-deployment
+  name: foo-deployment
+  namespace: foo-deployment
+  annotations:
+    #prometheus.io/port: "prometheus"
+    prometheus.io/scrape: 'true'
+spec:
+  selector:
+    matchLabels:
+      app: foo-deployment
+  template:
+    metadata:
+      labels:
+        app: foo-deployment
+      annotations:
+        #prometheus.io/port: "prometheus"
+        prometheus.io/scrape: 'true'
+    spec:
+      containers:
+      - name: foo-deployment
+        args:
+          - -text=foo
+        image: hashicorp/http-echo:1.0
+        imagePullPolicy: IfNotPresent     # Available values: Always,IfNotPresent,Never
+        ports:
+          - containerPort: 5678
+            name: http-pod
+            protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 50Mi
+          requests:
+            cpu: 50m
+            memory: 20Mi
+        startupProbe:
+          httpGet:
+            path: /
+            port: http-pod                # See value in ports.containerPort
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http-pod                # See value in ports.containerPort
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http-pod                # See value in ports.containerPort
+          periodSeconds: 10
+          failureThreshold: 1
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 20000
+          runAsGroup: 20000
+          capabilities:
+            drop: ["ALL"]
