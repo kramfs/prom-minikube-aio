@@ -28,7 +28,7 @@ export default function () {
   // check(response, { 'status was 200': (r) => r.status == 200 });
   check(foo, {
     'is status 200': (f) => f.status === 200,
-    'verify output is "foo" correct': (f) =>
+    'verify output "foo" is correct': (f) =>
       f.body.includes('foo'),
   });
 
