@@ -12,7 +12,7 @@
 
 ## Introduction
 
-Get your Kubernetes dev env up and running instantly with this automated setup. Spin up a local cluster with Minikube, prepped for monitoring, ingress, and load balancing ro simulate actual cloud environment – all in one go. Tear down just as easily – perfect for rapid development and experimentation.
+Get your Kubernetes dev env up and running instantly with this automated setup. Spin up a local cluster with Minikube, prepped for monitoring, ingress, and load balancing to simulate actual cloud environment – all in one go. Tear down just as easily – perfect for rapid development and experimentation.
 
 
 ## Features
