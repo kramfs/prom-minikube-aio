@@ -53,6 +53,12 @@ If the easy install doesn't work for some reason, install it manually
 - `k6` - Follow the [installation](https://k6.io/docs/get-started/installation/) instruction
 - `git` - Follow the [installation](https://github.com/git-guides/install-git) instruction
 
+### Additional Utilities
+These are not required but can add quality of life improvement when working with Kubernetes:
+
+  ```
+  pkgx install k9s kubens kubectx
+  ```
 
 
 ## Usage
@@ -79,9 +85,9 @@ Convention: Any text formatted as `like this` is a command that will need to be 
 * Since we are using private domain name (`dev.internal`), add the following to /etc/hosts for DNS resolution to work. This is also required so we have metrics per ingress:
     - Edit host file `sudo vi /etc/hosts`, add/append the following and save it:
         ```
-            192.168.49.50   grafana.dev.internal
-            192.168.49.50   prometheus.dev.internal
-            192.168.49.50   echo.dev.internal
+        192.168.49.50   grafana.dev.internal
+        192.168.49.50   prometheus.dev.internal
+        192.168.49.50   echo.dev.internal
         ```
 
 * Check the ingress for `/foo` and `/bar` is accessible: `task ingress-check`
