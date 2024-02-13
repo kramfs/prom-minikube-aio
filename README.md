@@ -38,7 +38,7 @@ Before you dive in, make sure the following tools are set up and ready to go: mi
     ```
     pkgx install minikube task jq k6 git
     ```
-- `Docker Engine` - Follow the [installation](https://docs.docker.com/engine/install/) instruction
+- `Docker Engine` - Follow the [installation](https://docs.docker.com/engine/install/) instruction. Make sure the Docker daemon is also available to the user running the commands w/o sudo.
 
 
 ### Install Manually
