@@ -113,12 +113,6 @@ Temporary Items
 .ionide
 
 
-# Other files
-*.swp
-*.log
-*.bak
-
-
 #############
 ### Linux ###
 #############
@@ -133,3 +127,8 @@ Temporary Items
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
+
+# Other files
+*.swp
+*.log
+*.bak

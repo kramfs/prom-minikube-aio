@@ -32,14 +32,23 @@ This mini-project provides a powerful yet easy-to-use development environment fo
 
 Before you dive in, make sure the following tools are set up and ready to go: minikube needs to spin up clusters smoothly, and docker must handle container creation without a hitch. This automated setup relies on them playing their parts flawlessly.
 
+Easy Install
+- `pkgx` - Follow the [installation](https://pkgx.sh/) instruction
+    - Once you have the `pkgx` utility installed, you can install the other required files using:
+    ```
+    pkgx install minikube task jq k6 git
+    ```
+- `Docker Engine` - Follow the [installation](https://docs.docker.com/engine/install/) instruction
+
+
+Install Manually - if the easy install doesn't work for some reason, install it manually
+
 - `Taskfile` - Follow the [installation](https://taskfile.dev/installation/) instruction
 - `Minikube` - Follow the [installation](https://minikube.sigs.k8s.io/docs/start/) instruction
-- `Docker Engine` - Follow the [installation](https://docs.docker.com/engine/install/) instruction
 - `kubectl` - Follow the [installation](https://kubernetes.io/docs/tasks/tools/) instruction
 - `jq` - Follow the [installation](https://jqlang.github.io/jq/download/) instruction
 - `k6` - Follow the [installation](https://k6.io/docs/get-started/installation/) instruction
-- `pkgx` - Follow the [installation](https://pkgx.sh/) instruction
-- `git`
+- `git` - 
 
 
 
