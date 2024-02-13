@@ -36,7 +36,7 @@ Before you dive in, make sure the following tools are set up and ready to go: mi
 - `pkgx` - Follow the [installation](https://pkgx.sh/) instruction
     - Once you have the `pkgx` utility installed, you can install the other required files using:
     ```
-    pkgx install minikube task jq k6 git
+    pkgx install minikube task terraform jq k6 git
     ```
 - `Docker Engine` - Follow the [installation](https://docs.docker.com/engine/install/) instruction. Make sure the Docker daemon is also available to the user running the commands w/o sudo.
 
@@ -47,10 +47,11 @@ If the easy install doesn't work for some reason, install it manually
 
 - `Taskfile` - Follow the [installation](https://taskfile.dev/installation/) instruction
 - `Minikube` - Follow the [installation](https://minikube.sigs.k8s.io/docs/start/) instruction
+- `Terraform` - Follow the [installation](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) instruction
 - `kubectl` - Follow the [installation](https://kubernetes.io/docs/tasks/tools/) instruction
 - `jq` - Follow the [installation](https://jqlang.github.io/jq/download/) instruction
 - `k6` - Follow the [installation](https://k6.io/docs/get-started/installation/) instruction
-- `git` - 
+- `git` - Follow the [installation](https://github.com/git-guides/install-git) instruction
 
 
 
