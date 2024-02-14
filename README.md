@@ -38,6 +38,19 @@ Before you dive in, make sure the following tools are set up and ready to go: mi
     ```
     pkgx install minikube task terraform jq k6 git
     ```
+   If you see an installation path error i.e.  `$HOME/.local/bin is not in PATH`, you can either:
+
+   add the PATH temporarily
+   ```
+   export PATH="$HOME/.local/bin:$PATH"
+   ```
+   Or add it permanently
+   ```
+   echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+   and try the `pkgx install` again.
+
 - `Docker Engine` - Follow the [installation](https://docs.docker.com/engine/install/) instruction. Make sure the Docker daemon is also available to the user running the commands w/o sudo.
 
 
