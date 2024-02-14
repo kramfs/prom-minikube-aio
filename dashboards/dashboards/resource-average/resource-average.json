@@ -79,8 +79,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -307,8 +306,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -414,8 +412,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -523,8 +520,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -689,7 +685,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -990,7 +986,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "bar-deployment",
           "value": "bar-deployment"
         },
@@ -1044,9 +1040,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "15s",
-          "value": "15s"
+          "selected": false,
+          "text": "30s",
+          "value": "30s"
         },
         "hide": 0,
         "includeAll": false,
@@ -1069,12 +1065,12 @@
             "value": "10s"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "15s",
             "value": "15s"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "30s",
             "value": "30s"
           },
@@ -1122,7 +1118,7 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "ingress-nginx",
           "value": "ingress-nginx"
         },
@@ -1150,7 +1146,7 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "k8s.io/ingress-nginx",
           "value": "k8s.io/ingress-nginx"
         },
@@ -1208,7 +1204,7 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -1237,7 +1233,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
