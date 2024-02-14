@@ -36,7 +36,7 @@ Before you dive in, make sure the following tools are set up and ready to go: mi
 - `pkgx` - Follow the [installation](https://pkgx.sh/) instruction
     - Once you have the `pkgx` utility installed, you can install the other required files using:
     ```
-    pkgx install minikube task terraform jq k6 git
+    pkgx install minikube task terraform kubectl jq k6 git
     ```
    If you see an installation path error i.e.  `$HOME/.local/bin is not in PATH`, you can either:
 
