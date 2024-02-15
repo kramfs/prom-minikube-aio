@@ -12,8 +12,8 @@ spec:
     matchLabels:
       #app: foo-deployment
       app.kubernetes.io/name: foo-deployment
-  endpoints:
-    #- port: metrics
-    #- port: http-service
-    #  path: /metrics
-    - interval: 5s
+  #endpoints:
+  #  #- port: metrics
+  #  #- port: http-service
+  #  #  path: /metrics
+  #  - interval: 5s

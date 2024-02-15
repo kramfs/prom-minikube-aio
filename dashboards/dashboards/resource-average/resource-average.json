@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 31,
+  "id": 30,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -602,7 +602,7 @@
       },
       "id": 8,
       "panels": [],
-      "title": "Resoure Average",
+      "title": "Resource Average",
       "type": "row"
     },
     {
@@ -1088,9 +1088,9 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "foo-deployment-8567568c4-xf2zb",
-          "value": "foo-deployment-8567568c4-xf2zb"
+          "selected": true,
+          "text": "foo-deployment-8567568c4-6xcxw",
+          "value": "foo-deployment-8567568c4-6xcxw"
         },
         "datasource": {
           "type": "prometheus",
@@ -1115,9 +1115,9 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "30s",
-          "value": "30s"
+          "selected": true,
+          "text": "15s",
+          "value": "15s"
         },
         "hide": 0,
         "includeAll": false,
@@ -1140,12 +1140,12 @@
             "value": "10s"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "15s",
             "value": "15s"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "30s",
             "value": "30s"
           },

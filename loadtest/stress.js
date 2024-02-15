@@ -7,18 +7,23 @@
 import http from "k6/http";
 import { check, sleep } from 'k6';
 
-// Stages[]: Start test with 400 VUs for 10s, then ramp up to 800 VUs for 20s, then ramping up again
-// 1500 VUs for over the next 60s before finally ramping down doing the reverse steps.
+// Stages[]: Start test in stages
 export const options = {
   // iterations: 1000,
   // vus: 10,
   // duration: '60s'
   stages: [
+    { duration: '30s', target: 60 },
+    { duration: '60s', target: 200 },
+    { duration: '1m', target: 300 },
+    { duration: '30s', target: 800 },
+    { duration: '30s', target: 400 },
+    { duration: '30s', target: 50 },
+    { duration: '30s', target: 120 },
+    { duration: '60s', target: 300 },
+    { duration: '1m30s', target: 1000 },
     { duration: '30s', target: 100 },
     { duration: '60s', target: 300 },
-    { duration: '2m30s', target: 600 },
-    { duration: '60s', target: 300 },
-    { duration: '30s', target: 100 },
   ],
   //summaryTrendStats: ['avg', 'p(95)'],
 };
@@ -40,5 +45,6 @@ export default function () {
       b.body.includes('bar'),
   });
 
-  sleep(1);
+  // sleep(1);
+  sleep(Math.random() * 3);
 }

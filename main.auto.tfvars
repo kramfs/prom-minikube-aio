@@ -16,6 +16,15 @@ metallb = {
   #version    = "4.9.1" # Chart version
 }
 
+prometheus-stack = {
+  name             = "kube-prometheus-stack"
+  namespace        = "kube-prometheus-stack"
+  create_namespace = true
+  repository       = "https://prometheus-community.github.io/helm-charts"
+  chart            = "kube-prometheus-stack"
+  version          = "" # Chart version
+}
+
 ingress-nginx = {
   name             = "ingress-nginx"
   namespace        = "ingress-nginx"
@@ -24,13 +33,4 @@ ingress-nginx = {
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
   #version    = "4.9.1" # Chart version
-}
-
-prometheus-stack = {
-  name             = "kube-prometheus-stack"
-  namespace        = "kube-prometheus-stack"
-  create_namespace = true
-  repository       = "https://prometheus-community.github.io/helm-charts"
-  chart            = "kube-prometheus-stack"
-  version          = "" # Chart version
 }

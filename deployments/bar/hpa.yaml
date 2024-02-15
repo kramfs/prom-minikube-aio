@@ -30,16 +30,16 @@ spec:
       policies:
       #- type: Pods              # The autoscaler will remove 2 pods at a time in a period of 60 seconds.
       #  value: 2
-      #  periodSeconds: 30
-      - type: Percent           # The autoscaler will remove 10% of the current replica number in 60 seconds.
-        value: 100
+      #  periodSeconds: 15
+      - type: Percent           # The autoscaler will remove 50% of the current replica number in 60 seconds.
+        value: 50
         periodSeconds: 15
-  #  scaleUp:
-  #    stabilizationWindowSeconds: 60
-  #    policies:
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
   #    - type: Percent
   #      value: 100
   #      periodSeconds: 15
-  #    - type: Pods
-  #      value: 2
-  #      periodSeconds: 15
+      - type: Pods
+        value: 1
+        periodSeconds: 15
