@@ -21,9 +21,9 @@ export const options = {
     { duration: '30s', target: 50 },
     { duration: '30s', target: 120 },
     { duration: '30s', target: 300 },
-    { duration: '1m30s', target: 700 },
+    { duration: '30s', target: 700 },
     { duration: '30s', target: 100 },
-    { duration: '60s', target: 300 },
+    { duration: '1m30s', target: 300 },
   ],
   //summaryTrendStats: ['avg', 'p(95)'],
 };
