@@ -34,7 +34,7 @@ Before you dive in, make sure the following tools are set up and ready to go: mi
 
 ### Easy Install
 - `pkgx` - Follow the [installation](https://pkgx.sh/) instruction
-    - Once you have the `pkgx` utility installed, you can install the other required files using:
+    - Once you have the `pkgx` utility installed, you can install the other required files with:
     ```
     pkgx install minikube task terraform kubectl jq k6 git
     ```
