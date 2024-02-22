@@ -21,9 +21,9 @@ This mini-project provides a powerful yet easy-to-use development environment fo
 
 * Effortless cluster provisioning and teardown: Leverages Terraform and the [Minikube provider](https://registry.terraform.io/providers/scott-the-programmer/minikube/latest/docs) for seamless cluster management.
 * Pre-configured observability: Get insights into your deployments with a ready-made Grafana dashboard showing resource usage and requests. Uses Grafana Terraform [provider](https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/dashboard)
-* Seamless service exposition: Two sample deployments are exposed using an ingress resource, accessible at /foo and /bar paths.
+* Seamless service exposition: Two sample deployments are exposed using an ingress resource, accessible at `/foo` and `/bar` paths.
 * Modular and customizable: Built with Minikube and Docker, but configurable to fit your preferences.
-* Load testing: Simulate real-world traffic with k6, ensuring your services are ready for the load.
+* Load testing: Simulate real-world traffic with [k6](https://k6.io/), ensuring your services are ready for the load.
 * CI/CD ready: Simulated pipeline using [Taskfile](https://taskfile.dev/) demonstrates real-world deployment workflows.
 
 
@@ -83,7 +83,18 @@ Convention: Any text formatted as `like this` is a command that will need to be 
 * Enter the repo folder: `cd prom-minikube-aio`
 * Typing `task` will output the available tasks pipelines to run. The `task` utility looks for a `taskfile.yaml` in the root directory.
 
-* Create the cluster: `task up`
+* Since we are using private domain name (`dev.internal`), add the following to your local /etc/hosts for DNS resolution to work. This is also required so we have metrics per ingress:
+    - Edit host file `sudo vi /etc/hosts`, add/append the following and save it:
+        ```
+        192.168.49.50   grafana.dev.internal
+        192.168.49.50   prometheus.dev.internal
+        192.168.49.50   echo.dev.internal
+        ```
+
+* Create the cluster:
+    ```
+    task up
+    ```
     - This will create a multi-node minikube cluster
     - Using Helm, install and configure the kube-prometheus-stack, ingress-nginx and metallb. The values for each chart are located in the `helm_values` folder
     - Deploy our test backend service, `foo` and `bar` deployment. This includes configuring the ingresses and servicemonitors
@@ -93,14 +104,6 @@ Convention: Any text formatted as `like this` is a command that will need to be 
         Minikube with the docker driver uses the default `192.168.49.0/24` subnet
         for its networking requirements. This will utilize the `192.168.49.50 - 60`
         range for use by metallb for Load Balancing purpose.
-        ```
-
-* Since we are using private domain name (`dev.internal`), add the following to /etc/hosts for DNS resolution to work. This is also required so we have metrics per ingress:
-    - Edit host file `sudo vi /etc/hosts`, add/append the following and save it:
-        ```
-        192.168.49.50   grafana.dev.internal
-        192.168.49.50   prometheus.dev.internal
-        192.168.49.50   echo.dev.internal
         ```
 
 * Check the ingress for `/foo` and `/bar` is accessible: `task ingress-check`
