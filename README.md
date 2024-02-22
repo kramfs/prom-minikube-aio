@@ -141,7 +141,7 @@ Convention: Any text formatted as `like this` is a command that will need to be 
 # In Summary:
 
 - `task up`                  - Bring up the cluster and apply the k8s manifests
-- `task ingress-check`       - Check the expose services via ingress
+- `task ingress-check`       - Check the exposed services via ingress
 - `task loadtest`            - Perform a stress (load) test of the backend service via ingress
 - `task prom-query`          - Perform a PromQL query to the ingress and backend service
 - `task cleanup`             - Terminate and clean up the cluster
