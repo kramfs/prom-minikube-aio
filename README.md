@@ -79,8 +79,14 @@ These are not required but can add quality of life improvement when working with
 Convention: Any text formatted as `like this` is a command that will need to be run.
 
 
-* Clone the repo: `git clone https://github.com/kramfs/prom-minikube-aio`
-* Enter the repo folder: `cd prom-minikube-aio`
+* Clone the repo: 
+    ```
+    git clone https://github.com/kramfs/prom-minikube-aio
+    ```
+* Enter the repo folder:
+    ```
+    cd prom-minikube-aio
+    ```
 * Typing `task` will output the available tasks pipelines to run. The `task` utility looks for a `taskfile.yaml` in the root directory.
 
 * Since we are using private domain name (`dev.internal`), add the following to your local /etc/hosts for DNS resolution to work. This is also required so we have metrics per ingress:
@@ -106,9 +112,18 @@ Convention: Any text formatted as `like this` is a command that will need to be 
         range for use by metallb for Load Balancing purpose.
         ```
 
-* Check the ingress for `/foo` and `/bar` is accessible: `task ingress-check`
-* Run the benchmark/loadtest: `task loadtest`
-* Check metrics using PromQL: `task prom-query`
+* Check the ingress for `/foo` and `/bar` is accessible:
+    ```
+    task ingress-check
+    ```
+* Run the benchmark/loadtest:
+    ```
+    task loadtest
+    ```
+* Check metrics using PromQL:
+    ```
+    task prom-query
+    ```
 
 * The resource average dashboard is accessible via
   - http://grafana.dev.internal/d/resource-avg/resource-average
@@ -118,15 +133,17 @@ Convention: Any text formatted as `like this` is a command that will need to be 
   - `/foo` : http://echo.dev.internal/foo
   - `/bar` : http://echo.dev.internal/bar
 
-* To tear down the whole setup and clean up the state files: `task cleanup`
+* To tear down the whole setup and clean up the state files:
+    ```
+    task cleanup
+    ```
 
-#
-In summary:
+# In Summary:
 
-- `task up`
-- `task ingress-check`
-- `task loadtest`
-- `task prom-query`
-- `task cleanup`
+- `task up`                  - Bring up the cluster and apply the k8s manifests
+- `task ingress-check`       - Check the expose services via ingress
+- `task loadtest`            - Perform a stress (load) test of the backend service via ingress
+- `task prom-query`          - Perform a PromQL query to the ingress and backend service
+- `task cleanup`             - Terminate and clean up the cluster
 
 #
