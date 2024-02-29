@@ -2,6 +2,7 @@ version: '3'
 
 tasks:
   default:
+    desc: "Show this list"
     cmds:
       - task --list-all
 
@@ -38,6 +39,7 @@ tasks:
       #PARAMETER: --auto-approve
 
   cleanup:
+    desc: "Terminate and perform cleanup of the cluster"
     cmds:
       - task: destroy
       #- rm -Rvf .terraform terraform.* .terraform.lock.hcl
@@ -68,6 +70,7 @@ tasks:
 
   ## Bring up the Cluster and setup the required resources
   up:
+    desc: "Bring up the cluster"
     env:
       INGRESS_CONTROLLER: kubectl get svc ingress-nginx-controller -n ingress-nginx
       INGRESS: kubectl get ingress -A
@@ -79,6 +82,7 @@ tasks:
       - $INGRESS
 
   loadtest:
+    desc: "Run the k6 loadtest"
     preconditions:
       # Fail when backend service is not up yet
       - sh: 'curl --connect-timeout 2 http://echo.dev.internal/'
@@ -88,6 +92,7 @@ tasks:
       - pkgx k6 run stress.js
 
   ingress-check:
+    desc: "Check the example ingress endpoints are accessible"
     preconditions:
        # Fail when backend service is not up yet
       - sh: 'curl --connect-timeout 2 http://echo.dev.internal/'
@@ -97,6 +102,7 @@ tasks:
       - curl -i http://echo.dev.internal/bar
 
   prom-query:
+    desc: "Run the PromQL query to test we can get metrics from Prometheus"
     env:
       QUERY: curl -s http://prometheus.dev.internal/api/v1/query --data-urlencode
     preconditions:

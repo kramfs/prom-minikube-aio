@@ -4,18 +4,18 @@
 
 module "minikube_cluster" {
   #source = "${path.module}/modules/minikube-cluster"
-  source             = "./module/minikube-cluster"
-  cluster_name       = lookup(var.minikube, "cluster_name", "minikube-cluster")
-  driver             = lookup(var.minikube, "driver", "docker")                 # docker,podman,kvm2,qemu,hyperkit,hyperv,ssh
-  kubernetes_version = lookup(var.minikube, "kubernetes_version", null)         # Default: Use "stable" if not set
-  container_runtime  = lookup(var.minikube, "container_runtime", "containerd")  # Default: containerd
-  nodes              = lookup(var.minikube, "nodes", "1")
+  source              = "github.com/kramfs/tf-minikube-cluster"
+  cluster_name        = lookup(var.minikube, "cluster_name", "minikube-cluster")
+  driver              = lookup(var.minikube, "driver", "docker")                 # docker,podman,kvm2,qemu,hyperkit,hyperv,ssh
+  kubernetes_version  = lookup(var.minikube, "kubernetes_version", null)         # Default: Use "stable" if not set
+  container_runtime   = lookup(var.minikube, "container_runtime", "containerd")  # Default: containerd
+  nodes               = lookup(var.minikube, "nodes", "1")
 }
 
 
-##############
-## PROVIDER ##
-##############
+##################
+## K8S PROVIDER ##
+##################
 
 provider "kubernetes" {
   config_path = "~/.kube/config"
