@@ -11,7 +11,7 @@ grafana:
       - grafana.dev.internal
 
   serviceMonitor:
-    scrapeTimeout: ""         # This should match or lower than the prometheus.prometheusSpec.scrapeInterval value
+    scrapeTimeout: ""         # Override scrape Prometheus timeout. This should match or lower than the prometheus.prometheusSpec.scrapeInterval (default to inherit) value
 
 ####################
 ## - PROMETHEUS - ##
