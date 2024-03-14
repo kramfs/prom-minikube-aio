@@ -36,7 +36,7 @@ tasks:
     cmds:
       - terraform destroy $PARAMETER
     env:
-      #PARAMETER: --auto-approve
+      PARAMETER: --auto-approve
 
   cleanup:
     desc: "Terminate and perform cleanup of the cluster"
